@@ -6,20 +6,23 @@ pub fn generate_menu() -> Menu {
         "Tauri Demo",
         Menu::with_items([
             CustomMenuItem::new("about", "About Tauri Demo").into(),
+            #[cfg(target_os = "macos")]
             MenuItem::Separator.into(),
             CustomMenuItem::new("clear", "Clear Data...")
-                    .accelerator("Shift+Command+Delete")
+                    .accelerator("Shift+CommandOrCtrl+Delete")
                     .into(),
+            #[cfg(target_os = "macos")]
             MenuItem::Separator.into(),
             MenuItem::Hide.into(),
             MenuItem::HideOthers.into(),
             MenuItem::ShowAll.into(),
+            #[cfg(target_os = "macos")]
             MenuItem::Separator.into(),
             MenuItem::Quit.into(),
         ])
     );
 
-    let menu = Menu::new()
+    let menu= Menu::new()
         .add_submenu(app_menu);
 
     menu
